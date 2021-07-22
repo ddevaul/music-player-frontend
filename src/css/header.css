@@ -1,0 +1,66 @@
+.slider {
+  /* -webkit-appearance: none; */
+  width: 25rem;
+  height: 15px;
+  background: rgb(9, 50, 104);
+  outline: none;
+  border: 5px solid rgb(235, 235, 235);
+  border-radius: 8px;
+}
+
+
+/* for chrome/safari */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 30px;
+  background: #000;
+  cursor: pointer;
+  border: 2px solid rgb(235, 235, 235);
+  border-radius: 4px;
+}
+
+/* for firefox */
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 30px;
+  background: #000;
+  cursor: pointer;
+  border: 2px solid rgb(235, 235, 235);
+  border-radius: 4px;
+}
+
+
+.slider-mobile {
+  /* -webkit-appearance: none; */
+  width: 15rem;
+  height: 15px;
+  background: rgb(9, 50, 104);
+  outline: none;
+  border: 5px solid rgb(235, 235, 235);
+  border-radius: 8px;
+}
+
+
+/* for chrome/safari */
+.slider-mobile::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 30px;
+  background: #000;
+  cursor: pointer;
+  border: 2px solid rgb(235, 235, 235);
+  border-radius: 4px;
+}
+
+/* for firefox */
+.slider-mobile::-moz-range-thumb {
+  width: 10px;
+  height: 30px;
+  background: #000;
+  cursor: pointer;
+  border: 2px solid rgb(235, 235, 235);
+  border-radius: 4px;
+}
