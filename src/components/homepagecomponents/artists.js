@@ -19,7 +19,7 @@ export default class Artists extends React.Component {
   }
 
   async componentDidMount() {
-    const artists = await fetch(`http://localhost:8000/api/artists/`);
+    const artists = await fetch(`https://desi-music-player.herokuapp.com/api/artists/`);
     const jArtists = await artists.json();
     this.setState({
       artists: jArtists,
@@ -28,7 +28,7 @@ export default class Artists extends React.Component {
 
   loadArtist = async (artist) => {
     // change this below
-    const response = await fetch(`http://localhost:8000/api/artists/artist/${artist.id}/essentials/`)
+    const response = await fetch(`https://desi-music-player.herokuapp.com/api/artists/artist/${artist.id}/essentials/`)
     const jResponse = await response.json();
     this.setState({ 
       artist: true,
@@ -39,7 +39,7 @@ export default class Artists extends React.Component {
   }
 
   loadPlaylist = async (playlist) => {
-    const response = await fetch(`http://localhost:8000/api/playlists/playlist/${playlist.id}/songs/`)
+    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlist.id}/songs/`)
     const jResponse = await response.json();
     this.setState({ 
       artist: false,

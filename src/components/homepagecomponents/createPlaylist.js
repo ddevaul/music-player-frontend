@@ -49,9 +49,9 @@ export default class CreatePlaylist extends React.Component {
       },
       body: JSON.stringify({ name: playlistname })
     };
-    const newPlaylist = await fetch('http://localhost:8000/api/playlists/', requestOptions);
+    const newPlaylist = await fetch('https://desi-music-player.herokuapp.com/api/playlists/', requestOptions);
     // top songs to quick add 
-    const songs = await fetch('http://localhost:8000/api/playlists/playlist/10/songs/');
+    const songs = await fetch('https://desi-music-player.herokuapp.com/api/playlists/playlist/10/songs/');
     if (newPlaylist.status !== 500 && songs.status !== 401){
       const jSongs = await songs.json();
       const jnewPlaylist = await newPlaylist.json();
@@ -72,7 +72,7 @@ export default class CreatePlaylist extends React.Component {
   // searches backend for songs whose names match whats been typed in
   // the search bar
   searchForSong = async () => {
-    const songs = await fetch(`http://localhost:8000/api/songs/song/songbyname/${this.state.searchBarValue}/`);
+    const songs = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/songbyname/${this.state.searchBarValue}/`);
     const jSongs = await songs.json();
     this.setState({ searchedSongs: jSongs });
   }
@@ -91,7 +91,7 @@ export default class CreatePlaylist extends React.Component {
       },
       body: JSON.stringify({ refresh: localStorage.getItem('refresh') })
     };
-    const response = await fetch('http://localhost:8000/api/token/refresh/', requestOptions)
+    const response = await fetch('https://desi-music-player.herokuapp.com/api/token/refresh/', requestOptions)
     if(response.status === 200) {
       const jResponse = await response.json();
       localStorage.setItem("refresh", jResponse.refresh);
@@ -129,7 +129,7 @@ export default class CreatePlaylist extends React.Component {
       },
       body: JSON.stringify({ song, order: this.state.order, playlist: this.state.playlist.id })
     };
-    const songWrapper = await fetch(`http://localhost:8000/api/playlists/playlist/${this.state.playlist.id}/songs/`, requestOptions);
+    const songWrapper = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${this.state.playlist.id}/songs/`, requestOptions);
     if (songWrapper.status !== 401) {
       let order = this.state.order;
       order++;
@@ -164,7 +164,7 @@ export default class CreatePlaylist extends React.Component {
         'Authorization': `Bearer ${localStorage.getItem('access')}`
       },
     };
-    const response = await fetch(`http://localhost:8000/api/songwrappers/songwrapper/${songWrapperId}/`, requestOptions);
+    const response = await fetch(`https://desi-music-player.herokuapp.com/api/songwrappers/songwrapper/${songWrapperId}/`, requestOptions);
     if (response.status !== 401) {
       this.loadSongsInPlaylist();
       return true;
@@ -176,7 +176,7 @@ export default class CreatePlaylist extends React.Component {
   // displayed
   // !!! probably can be refactored out
   loadSongsInPlaylist = async () => {
-    const songs = await fetch(`http://localhost:8000/api/playlists/playlist/${this.state.playlist.id}/songs/`);
+    const songs = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${this.state.playlist.id}/songs/`);
     const jSongs = await songs.json();
     this.setState({ songsInPlaylist: jSongs});
   }

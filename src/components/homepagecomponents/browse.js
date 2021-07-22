@@ -23,11 +23,11 @@ export default class Browse extends React.Component {
   }
   async componentDidMount() {
     // need to set curated playlists for artists, singles, and albums
-    const essentials = await fetch(`http://localhost:8000/api/artists/artist/${1}/essentials/`)
+    const essentials = await fetch(`https://desi-music-player.herokuapp.com/api/artists/artist/${1}/essentials/`)
     const jEssentials = await essentials.json();
-    const newSingles = await fetch(`http://localhost:8000/api/curatedplaylists/curatedplaylist/10/`)
+    const newSingles = await fetch(`https://desi-music-player.herokuapp.com/api/curatedplaylists/curatedplaylist/10/`)
     const jnewSingles = await newSingles.json();
-    const album = await fetch(`http://localhost:8000/api/albums/album/8/`)
+    const album = await fetch(`https://desi-music-player.herokuapp.com/api/albums/album/8/`)
     const jAlbum = await album.json();
     this.setState({
       album: jAlbum,
@@ -37,7 +37,7 @@ export default class Browse extends React.Component {
   }
 
   loadAlbum = async (album) => {
-    const response = await fetch(`http://localhost:8000/api/playlists/playlist/${album.id}/songs/`)
+    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${album.id}/songs/`)
     const jResponse = await response.json();
     this.setState({ 
       playlist: false,
@@ -47,7 +47,7 @@ export default class Browse extends React.Component {
   } 
 
   loadPlaylist = async (playlist) => {
-    const response = await fetch(`http://localhost:8000/api/playlists/playlist/${playlist.id}/songs/`)
+    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlist.id}/songs/`)
     const jResponse = await response.json();
     this.setState({ 
       playlist: true,

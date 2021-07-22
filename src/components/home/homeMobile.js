@@ -32,7 +32,7 @@ export default class HomeMobile extends React.Component {
 
   async componentDidMount() {
     console.log("mobile version");
-    const song = await fetch(`http://localhost:8000/api/songs/song/${6}/`);
+    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${6}/`);
     const jSong = await song.json();
     // set playlist to empty but queue the just acquired song
     this.setPlayListSong([], jSong);
@@ -86,7 +86,7 @@ export default class HomeMobile extends React.Component {
   // get songs and keep array of songs in state
   playPlaylist = async (playlistId) => {
     this.state.audio.pause();
-    const response = await fetch(`http://localhost:8000/api/playlists/playlist/${playlistId}/songs/`);
+    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/songs/`);
     const jResponse = await response.json();
     this.setPlayListSong(jResponse, jResponse[0].song);
     this.play();
@@ -94,7 +94,7 @@ export default class HomeMobile extends React.Component {
 
   // similar to above but it only gets one song and puts an empty array in state
   playSingleSong = async (songId) => {
-    const song = await fetch(`http://localhost:8000/api/songs/song/${songId}/`);
+    const song = await fetch(`hhttps://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
     const jSong = await song.json();
     this.setPlayListSong([], jSong);
     this.pause();

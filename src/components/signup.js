@@ -54,7 +54,7 @@ export default class Signup extends React.Component {
         },
         body: JSON.stringify({ user_name: this.state.username, password: this.state.password, email: this.state.email })
       }
-      const response = await fetch('http://localhost:8000/api/signup/create/', requestOptions)
+      const response = await fetch('https://desi-music-player.herokuapp.com/api/signup/create/', requestOptions)
       if (response.status === 201) {
         this.setState({ message: "Signed up" , redirect: true});
       } 

@@ -30,7 +30,7 @@ export default class Login extends React.Component {
       },
       body: JSON.stringify({ user_name: this.state.username, password: this.state.password })
     }
-    const response = await fetch('http://localhost:8000/api/token/', requestOptions)
+    const response = await fetch('https://desi-music-player.herokuapp.com/api/token/', requestOptions)
     const jResponse = await response.json();
     if(response.status === 200) {
       this.setState({message: "Logged In", redirect: true});

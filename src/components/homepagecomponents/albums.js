@@ -15,7 +15,7 @@ export default class Albums extends React.Component {
     }
   }
   async componentDidMount() {
-    const albums = await fetch(`http://localhost:8000/api/albums/`);
+    const albums = await fetch(`https://desi-music-player.herokuapp.com/api/albums/`);
     const jAlbums = await albums.json();
     this.setState({
       albums: jAlbums,
@@ -23,7 +23,7 @@ export default class Albums extends React.Component {
   }
 
   loadAlbum = async (album) => {
-    const response = await fetch(`http://localhost:8000/api/playlists/playlist/${album.id}/songs/`)
+    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${album.id}/songs/`)
     const jResponse = await response.json();
     this.setState({ 
       album: true,

@@ -48,7 +48,7 @@ export default class ListenNow extends React.Component {
         'Authorization': `Bearer ${localStorage.getItem('access')}`
       },
     }
-    const playlists = await fetch(`http://localhost:8000/api/playlists/`, requestOptions);
+    const playlists = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/`, requestOptions);
     console.log(playlists.status)
     if (playlists.status !== 401 && playlists.status !== 500) {
       const jPlaylists = await playlists.json();
@@ -70,7 +70,7 @@ export default class ListenNow extends React.Component {
       },
       body: JSON.stringify({ refresh: localStorage.getItem('refresh') })
     };
-    const response = await fetch('http://localhost:8000/api/token/refresh/', requestOptions)
+    const response = await fetch('https://desi-music-player.herokuapp.com/api/token/refresh/', requestOptions)
     if(response.status === 200) {
       const jResponse = await response.json();
       this.setState({message: "Logged In", redirect: true});
@@ -85,7 +85,7 @@ export default class ListenNow extends React.Component {
 
   // get playlist information from backend and save said information in state
   loadPlaylist = async (playlist) => {
-    const response = await fetch(`http://localhost:8000/api/playlists/playlist/${playlist.id}/songs/`)
+    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlist.id}/songs/`)
     const jResponse = await response.json();
     this.setState({ 
       playlist: true,
@@ -113,7 +113,7 @@ export default class ListenNow extends React.Component {
         'Authorization': `Bearer ${localStorage.getItem('access')}`
       },
     };
-    await fetch(`http://localhost:8000/api/playlists/playlist/${playlistId}/`, requestOptions);
+    await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/`, requestOptions);
   }
 
   // go back to view of all playlists, don't have any special windows
