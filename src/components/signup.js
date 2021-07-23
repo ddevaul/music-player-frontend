@@ -94,7 +94,7 @@ export default class Signup extends React.Component {
       height: '2rem',
     }
     if (this.state.redirect) {
-      return (<Redirect to="/music-player/#/login"></Redirect>)
+      return (<Redirect to="/#/login"></Redirect>)
     }
 
     return (

@@ -25,9 +25,9 @@ export default class Browse extends React.Component {
     // need to set curated playlists for artists, singles, and albums
     const essentials = await fetch(`https://desi-music-player.herokuapp.com/api/artists/artist/${1}/essentials/`)
     const jEssentials = await essentials.json();
-    const newSingles = await fetch(`https://desi-music-player.herokuapp.com/api/curatedplaylists/curatedplaylist/10/`)
+    const newSingles = await fetch(`https://desi-music-player.herokuapp.com/api/curatedplaylists/curatedplaylist/2/`)
     const jnewSingles = await newSingles.json();
-    const album = await fetch(`https://desi-music-player.herokuapp.com/api/albums/album/8/`)
+    const album = await fetch(`https://desi-music-player.herokuapp.com/api/albums/album/1/`)
     const jAlbum = await album.json();
     this.setState({
       album: jAlbum,
