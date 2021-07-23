@@ -166,7 +166,7 @@ export default class EditPlaylist extends React.Component {
       borderTop: '1px solid white'
     }
       if (this.state.sendToLogin) {
-        <Redirect to="/music-player/#/login"></Redirect>
+        <Redirect to="/#/login"></Redirect>
       }
       return (
         <div style={mainDivStyle}>

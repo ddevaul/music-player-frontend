@@ -48,16 +48,16 @@ export default class Settings extends React.Component {
 
     if (this.state.redirect) {
       return(
-        <Redirect to="/music-player/#/login"></Redirect>
+        <Redirect to="/#/login"></Redirect>
       );
     }
 
     let loginLogoutSignup = 
     <div>
-        <a href="/music-player/#/login">
+        <a href="#/login">
           <Button variant="secondary">Login</Button>
         </a>
-        <a href="/music-player/#/signup">
+        <a href="#/signup">
           <Button variant="secondary">Signup</Button>
         </a>
     </div>
