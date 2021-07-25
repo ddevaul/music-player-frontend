@@ -33,7 +33,7 @@ export default class Home extends React.Component {
     return (
       <div>
         {/* display the mobile version if the screen size is less than 1000px */}
-        {this.state.width > 10 ? <HomeDesktop></HomeDesktop> : <HomeMobile></HomeMobile>}
+        {this.state.width > 1000 ? <HomeDesktop></HomeDesktop> : <HomeMobile></HomeMobile>}
       </div>
     )
   }
