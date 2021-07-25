@@ -94,7 +94,7 @@ export default class HomeMobile extends React.Component {
 
   // similar to above but it only gets one song and puts an empty array in state
   playSingleSong = async (songId) => {
-    const song = await fetch(`hhttps://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
+    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
     const jSong = await song.json();
     this.setPlayListSong([], jSong);
     this.pause();
