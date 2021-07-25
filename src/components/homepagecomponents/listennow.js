@@ -25,17 +25,18 @@ export default class ListenNow extends React.Component {
   // checks if user's tokens have expired and sends them to login screen if 
   // they have expired
   async componentDidMount() {
-   const accessTokenWorked = await this.tryAccessToken();
-    if (!accessTokenWorked) {
-    const refreshTokenWorked = await this.tryRefreshToken();
+    window.scrollTo(0, 0);
+    const accessTokenWorked = await this.tryAccessToken();
+      if (!accessTokenWorked) {
+      const refreshTokenWorked = await this.tryRefreshToken();
 
-    if (refreshTokenWorked) {
-      await this.tryAccessToken();
+      if (refreshTokenWorked) {
+        await this.tryAccessToken();
+      }
+      else {
+        this.setState({ sendToLogin: true });
+      }
     }
-    else {
-      this.setState({ sendToLogin: true });
-    }
-   }
   }
 
   // tries to return current users playlists
