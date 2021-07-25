@@ -28,7 +28,7 @@ export default class HomeDesktop extends React.Component {
   }
   async componentDidMount() {
     console.log("desktop version");
-    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${6}/`);
+    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/1/`);
     const jSong = await song.json();
     // set playlist to empty but queue the just acquired song
     this.setPlayListSong([], jSong);

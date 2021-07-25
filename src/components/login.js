@@ -73,7 +73,7 @@ export default class Login extends React.Component {
       height: '2rem',
     }
     if (this.state.redirect) {
-      return (<Redirect to="/music-player/"></Redirect>)
+      return (<Redirect to="/"></Redirect>)
     }
     return (
       <div style={divStyle}>
@@ -84,7 +84,7 @@ export default class Login extends React.Component {
           <input style={inputStyle} value={this.state.password} onChange={this.passwordChange} placeholder="Password" type="password"></input>
           <input style={buttonStyle} type="submit" value="Login"></input>
         </form>
-        <a href="/#/signup">Signup</a>
+        <a href="/music-player-frontend/#/signup">Signup</a>
       </div>
     )
   }

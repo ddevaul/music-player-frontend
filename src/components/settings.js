@@ -69,7 +69,7 @@ export default class Settings extends React.Component {
       <div style={divStyle}>
         <div style={headerDivStyle}>
           <div style={backButtonDivStyle}>
-            <a href="/music-player/#/">
+            <a href="/music-player-frontend/#/">
               <Button variant="secondary"><ArrowBack></ArrowBack></Button>
             </a>
           </div>

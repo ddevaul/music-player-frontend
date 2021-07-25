@@ -168,12 +168,12 @@ export default class Nav extends React.Component {
     let loginLogoutSignup = 
     <div>
       <li>
-        <a href="/#/login">
+        <a href="/music-player-frontend/#/login">
           <Button style={buttonStyle} variant="secondary">Login</Button>
         </a>
       </li>
       <li>
-        <a href="/#/signup">
+        <a href="/music-player-frontend/#/signup">
           <Button style={buttonStyle} variant="secondary">Signup</Button>
         </a>
       </li>

@@ -127,7 +127,7 @@ export default class NavMobile extends React.Component {
            {songs}
           </div>
           <div>
-            <a href="/#/settings" style={{ color: 'white' }}>
+            <a href="/music-player-frontend/#/settings" style={{ color: 'white' }}>
               <div style={cardStyle}>
                 <Gear style={iconStyle}></Gear>
                 <div style={cardTextDivStyle}>

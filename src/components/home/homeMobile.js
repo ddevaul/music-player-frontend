@@ -32,7 +32,7 @@ export default class HomeMobile extends React.Component {
 
   async componentDidMount() {
     console.log("mobile version");
-    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${6}/`);
+    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/1/`);
     const jSong = await song.json();
     // set playlist to empty but queue the just acquired song
     this.setPlayListSong([], jSong);
@@ -297,8 +297,8 @@ export default class HomeMobile extends React.Component {
     }
     return (
       <div style={outerDivStyle}>
-        <div classname="main outer div" style={outerMainDivStyle}>
-          <div className="main div" style={mainDivStyle}>
+        <div style={outerMainDivStyle}>
+          <div style={mainDivStyle}>
             {page}
           </div>
           <div style={footerStyle}>

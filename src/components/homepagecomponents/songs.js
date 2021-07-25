@@ -15,10 +15,11 @@ export default class Songs extends React.Component {
   // state
   async componentDidMount() {
     // this fetch should get the curated playlist 'New Singles' 
-    const songs = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${2}/songs/`);
+    const songs = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/3/songs/`);
     const jSongs = await songs.json();
-    const playlist = await fetch(`https://desi-music-player.herokuapp.com/api/curatedplaylists/curatedplaylist/10/`);
+    const playlist = await fetch(`https://desi-music-player.herokuapp.com/api/curatedplaylists/curatedplaylist/3/`);
     const jPlaylist = await playlist.json();
+    console.log(jPlaylist.name);
     this.setState({
       songWrappers: jSongs,
       currentPlaylist: jPlaylist,
@@ -27,8 +28,9 @@ export default class Songs extends React.Component {
   
   render() {
     const mainDivStyle = {
-      height: '100%',
+      marginTop: '0',
       width: '100%',
+      height: '100%',
       backgroundColor: 'rgb(45, 45, 45)',
       color: 'white',
     }
