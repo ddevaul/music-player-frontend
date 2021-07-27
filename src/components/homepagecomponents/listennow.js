@@ -120,7 +120,6 @@ export default class ListenNow extends React.Component {
   // go back to view of all playlists, don't have any special windows
   back = () => {
     this.setState({ playlist: false, createPlaylist: false, editPlaylist: false });
-    window.location.reload();
   }
 
   render() {

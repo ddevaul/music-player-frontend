@@ -51,7 +51,7 @@ export default class CreatePlaylist extends React.Component {
     };
     const newPlaylist = await fetch('https://desi-music-player.herokuapp.com/api/playlists/', requestOptions);
     // top songs to quick add 
-    const songs = await fetch('https://desi-music-player.herokuapp.com/api/playlists/playlist/10/songs/');
+    const songs = await fetch('https://desi-music-player.herokuapp.com/api/playlists/playlist/3/songs/');
     if (newPlaylist.status !== 500 && songs.status !== 401){
       const jSongs = await songs.json();
       const jnewPlaylist = await newPlaylist.json();
