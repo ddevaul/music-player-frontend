@@ -66,7 +66,7 @@ export default class Home extends React.Component {
       }
     };
     let response = await fetch(url, requestOptions);
-    if (response.status !== 200){
+    if (response.status !== 200 && response.status !== 201){
       this.loginPattern();
       response = await fetch(url, requestOptions);
     }

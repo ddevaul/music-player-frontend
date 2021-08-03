@@ -20,7 +20,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    this.setState({ showLoading: true }, () => this.loginProcedure());
+    this.loginProcedure();
   }
 
   loginProcedure = async () => {
