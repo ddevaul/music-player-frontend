@@ -4,8 +4,6 @@ import Button from "react-bootstrap/Button";
 import Playlist from "./playlist";
 import CreatePlaylist from "./createPlaylist";
 import EditPlaylist from "./editPlaylist";
-import { Redirect } from 'react-router';
-
 
 export default class ListenNow extends React.Component {
   constructor(props){
@@ -18,30 +16,19 @@ export default class ListenNow extends React.Component {
       songWrappers: [],
       playlists: [],
       songs: [],
-      sendToLogin: false,
     }
-}
+  }  
 
   // checks if user's tokens have expired and sends them to login screen if 
   // they have expired
-  async componentDidMount() {
+  componentDidMount() {
     window.scrollTo(0, 0);
-    const accessTokenWorked = await this.tryAccessToken();
-      if (!accessTokenWorked) {
-      const refreshTokenWorked = await this.tryRefreshToken();
-
-      if (refreshTokenWorked) {
-        await this.tryAccessToken();
-      }
-      else {
-        this.setState({ sendToLogin: true });
-      }
-    }
+    this.getPlaylists();
   }
 
   // tries to return current users playlists
   // returns true if connection to backend is successful and false otherwise
-  tryAccessToken = async () => {
+  getPlaylists = async () => {
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -49,44 +36,14 @@ export default class ListenNow extends React.Component {
         'Authorization': `Bearer ${localStorage.getItem('access')}`
       },
     }
-    const playlists = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/`, requestOptions);
-    console.log(playlists.status)
-    if (playlists.status !== 401 && playlists.status !== 500) {
-      const jPlaylists = await playlists.json();
-      this.setState({
-        playlists: jPlaylists,
-      });
-      return true;
-    }
-    return false;
-  }
-
-  // tries to reset refresh and access tokens if possible, returns true 
-  // if it is possible and false otherwise
-  tryRefreshToken = async () => {
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ refresh: localStorage.getItem('refresh') })
-    };
-    const response = await fetch('https://desi-music-player.herokuapp.com/api/token/refresh/', requestOptions)
-    if(response.status === 200) {
-      const jResponse = await response.json();
-      this.setState({message: "Logged In", redirect: true});
-      localStorage.setItem("refresh", jResponse.refresh);
-      localStorage.setItem("access", jResponse.access);
-      return true;
-    } 
-    else {
-      return false;
-    }
+    const playlists = await this.props.fetchAPI(`https://desi-music-player.herokuapp.com/api/playlists/`, requestOptions);
+    const jPlaylists = await playlists.json();
+    this.setState({ playlists: jPlaylists });
   }
 
   // get playlist information from backend and save said information in state
   loadPlaylist = async (playlist) => {
-    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlist.id}/songs/`)
+    const response = await this.props.fetchAPI(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlist.id}/songs/`, {});
     const jResponse = await response.json();
     this.setState({ 
       playlist: true,
@@ -114,7 +71,7 @@ export default class ListenNow extends React.Component {
         'Authorization': `Bearer ${localStorage.getItem('access')}`
       },
     };
-    await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/`, requestOptions);
+    await this.props.fetchAPI(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/`, requestOptions);
   }
 
   // go back to view of all playlists, don't have any special windows
@@ -142,12 +99,7 @@ export default class ListenNow extends React.Component {
       marginLeft: '1rem',
     }
 
-    if (this.state.sendToLogin) {
-      return (
-        <Redirect to="login"></Redirect>
-      )
-    }
-    else if (this.state.createPlaylist){
+    if (this.state.createPlaylist){
       return (
         <CreatePlaylist back={this.back}></CreatePlaylist>
       )

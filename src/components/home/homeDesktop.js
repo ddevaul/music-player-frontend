@@ -6,6 +6,8 @@ import Browse from "../homepagecomponents/browse";
 import Albums from "../homepagecomponents/albums";
 import Artists from "../homepagecomponents/artists";
 import Songs from "../homepagecomponents/songs";
+import NavMobile from "../homepagecomponents/navMobile";
+import HeaderMobile from "../homepagecomponents/headerMobile";
 const mp3s = require.context("../../asssets/songs", true);
 
 export default class HomeDesktop extends React.Component {
@@ -27,8 +29,14 @@ export default class HomeDesktop extends React.Component {
     }
   }
   async componentDidMount() {
-    console.log("desktop version");
-    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/1/`);
+    let song;
+    try {
+     song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/1/`);
+    } catch(err) {
+      await this.props.loginPattern();
+      song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/1/`);
+    }
+     
     const jSong = await song.json();
     // set playlist to empty but queue the just acquired song
     this.setPlayListSong([], jSong);
@@ -82,7 +90,13 @@ export default class HomeDesktop extends React.Component {
   // get songs and keep array of songs in state
   playPlaylist = async (playlistId) => {
     this.state.audio.pause();
-    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/songs/`);
+    let response;
+    try {
+      response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/songs/`);
+    } catch(err){
+      await this.props.loginPattern();
+      response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/songs/`);
+    }
     const jResponse = await response.json();
     this.setPlayListSong(jResponse, jResponse[0].song);
     this.play();
@@ -90,7 +104,13 @@ export default class HomeDesktop extends React.Component {
 
   // similar to above but it only gets one song and puts an empty array in state
   playSingleSong = async (songId) => {
-    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
+    let song;
+    try { 
+    song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
+    } catch(err){
+      await this.props.loginPattern();
+      song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
+    }
     const jSong = await song.json();
     this.setPlayListSong([], jSong);
     this.pause();
@@ -251,6 +271,41 @@ export default class HomeDesktop extends React.Component {
       default:
         page = <ListenNow></ListenNow>
     }
+    if (this.mobile){
+      return (
+        <div style={outerDivStyle}>
+          <div style={outerMainDivStyle}>
+            <div style={mainDivStyle}>
+              {page}
+            </div>
+            <div style={footerStyle}>
+              <div style={headerDivStyle}>
+              <HeaderMobile
+                showAlbumNav={this.showAlbumNav}
+                audio={this.state.audio} 
+                play={this.play} pause={this.pause} 
+                playBool={this.state.playing} 
+                timeScrub={this.timeScrub} 
+                volumeChange={this.volumeChange} 
+                nextSong={this.nextSong} 
+                prevSong={this.prevSong} 
+                album={this.state.album}
+                artist={this.state.artist} 
+                song={this.state.song}
+                duration={this.state.duration} 
+                currentTime={this.state.currentTime}
+              ></HeaderMobile>
+              </div>
+              <div style={navDivStyle}>
+                <NavMobile page={this.state.page} setPage={this.setPage}
+                showSettings={this.showSettings}>
+                </NavMobile>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return (
       <div style={outerDivStyle}>
         <div style={navDivStyle}>
@@ -278,6 +333,6 @@ export default class HomeDesktop extends React.Component {
           </div>
         </div>
       </div>
-    )
+    ) 
   }
 }

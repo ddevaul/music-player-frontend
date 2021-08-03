@@ -23,11 +23,11 @@ export default class Browse extends React.Component {
   }
   async componentDidMount() {
     // need to set curated playlists for artists, singles, and albums
-    const essentials = await fetch(`https://desi-music-player.herokuapp.com/api/artists/artist/${1}/essentials/`)
+    const essentials = await this.props.fetchAPI(`https://desi-music-player.herokuapp.com/api/artists/artist/${1}/essentials/`, {});
     const jEssentials = await essentials.json();
-    const newSingles = await fetch(`https://desi-music-player.herokuapp.com/api/curatedplaylists/curatedplaylist/2/`)
+    const newSingles = await this.props.fetchAPI(`https://desi-music-player.herokuapp.com/api/curatedplaylists/curatedplaylist/2/`, {});
     const jnewSingles = await newSingles.json();
-    const album = await fetch(`https://desi-music-player.herokuapp.com/api/albums/album/1/`)
+    const album = await this.props.fetchAPI(`https://desi-music-player.herokuapp.com/api/albums/album/1/`, {});
     const jAlbum = await album.json();
     this.setState({
       album: jAlbum,
@@ -37,7 +37,7 @@ export default class Browse extends React.Component {
   }
 
   loadAlbum = async (album) => {
-    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${album.id}/songs/`)
+    const response = await this.props.fetchAPI(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${album.id}/songs/`, {});
     const jResponse = await response.json();
     this.setState({ 
       playlist: false,
@@ -47,7 +47,7 @@ export default class Browse extends React.Component {
   } 
 
   loadPlaylist = async (playlist) => {
-    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlist.id}/songs/`)
+    const response = await this.props.fetchAPI(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlist.id}/songs/`, {});
     const jResponse = await response.json();
     this.setState({ 
       playlist: true,

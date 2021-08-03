@@ -20,8 +20,7 @@ export default class HomeMobile extends React.Component {
       song: {},
       album: {},
       artist: {},
-      // id of playlist that is being displayed
-      infoPlaylistId: 0,
+      infoPlaylistId: 0, // id of playlist that is being displayed
       audio: new Audio(mp3s('./maineday6.m4a').default),
       duration: 0,
       currentTime: 0,
@@ -32,7 +31,13 @@ export default class HomeMobile extends React.Component {
 
   async componentDidMount() {
     console.log("mobile version");
-    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/1/`);
+    let song;
+    try {
+      song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/1/`);
+    } catch(err){
+      await this.props.loginPattern();
+      song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/1/`);
+    }
     const jSong = await song.json();
     // set playlist to empty but queue the just acquired song
     this.setPlayListSong([], jSong);
@@ -86,7 +91,13 @@ export default class HomeMobile extends React.Component {
   // get songs and keep array of songs in state
   playPlaylist = async (playlistId) => {
     this.state.audio.pause();
-    const response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/songs/`);
+    let response 
+    try {
+      response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/songs/`);
+    } catch (err) {
+      await this.props.loginPattern();
+      response = await fetch(`https://desi-music-player.herokuapp.com/api/playlists/playlist/${playlistId}/songs/`);
+    }
     const jResponse = await response.json();
     this.setPlayListSong(jResponse, jResponse[0].song);
     this.play();
@@ -94,7 +105,13 @@ export default class HomeMobile extends React.Component {
 
   // similar to above but it only gets one song and puts an empty array in state
   playSingleSong = async (songId) => {
-    const song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
+    let song;
+    try {
+      song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
+    } catch(err) {
+      await this.props.loginPattern();
+      song = await fetch(`https://desi-music-player.herokuapp.com/api/songs/song/${songId}/`);
+    }
     const jSong = await song.json();
     this.setPlayListSong([], jSong);
     this.pause();
